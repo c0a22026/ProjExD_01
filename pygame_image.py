@@ -8,7 +8,8 @@ def main():
     bg_img = pg.image.load("ex01/fig/pg_bg.jpg")
     kf_img = pg.image.load("ex01/fig/3.png")
     kf_img = pg.transform.flip(kf_img, True, False)
-    kf_imgs = [kf_img, pg.transform.rotozoom(kf_img, 10, 1.0)]
+    kf_imgs = [pg.transform.rotozoom(kf_img, 10, 1.0), kf_img]
+
     tmr = 0
 
     while True:
@@ -16,8 +17,10 @@ def main():
             if event.type == pg.QUIT: return
 
         tmr += 1
-        screen.blit(bg_img, [0, 0])
-        screen.blit(kf_imgs[tmr%2], [200, 300])
+        screen.blit(bg_img, [-tmr, 0])
+        screen.blit(bg_img, [1600 - tmr, 0])
+        screen.blit(kf_imgs[tmr%2], [300, 200])
+
         pg.display.update()
         clock.tick(100)
 
